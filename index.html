@@ -1,99 +1,29 @@
 <html>
 <head>
     <title>Interactive Sketch</title>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script src="resources/hotspotResizer.js"></script>
+    <script src="resources/hotspotNavigation.js"></script>
 </head>
 <body>
 
-<style type="text/css">
-    @keyframes fadeIn {
-        from { opacity: 0; }
-          to { opacity: 1; }
-    }
-    img {
-        /** Set image interpolation for Internet Explorer */
-        -ms-interpolation-mode: bicubic;
-    }
-    .sketches > div {
-        margin: 0 auto;
-        display: none;
-        animation: fadeIn 1s;
-    }
-    .sketches div img {
-        width: 100%;
-        display: block;
-    }
-    .hotspot {
-        display: block;
-        background-color: yellow;
-        position: relative;
-        opacity: 0.5;
-    }
-</style>
 
 <div class="sketches">
+
     <div id="page1" style="max-width: 1200px">
         <a href="#2" onclick="gotoPage(2)" class="hotspot" style="width: 1115px;height: 57px;top: 200px;left: 35px;"></a>
 
-        <img src="1-product-catalog_arent.gif" class="hotspotImage"/>
+        <img src="1-product-catalog_arent.gif"/>
 
     </div>
 
     <div id="page2" style="max-width: 1200px">
-        <a href="#1" onclick="gotoPage(1)">
-            <img src="2-product-details-arent.gif"/>
-        </a>
+        <a href="#1" onclick="gotoPage(1)" class="hotspot" style="width: 62px;height: 57px;top: 94px;left: 35px;"></a>
+
+        <img src="2-product-details-arent.gif"/>
     </div>
+
 </div>
-
-<script type="text/javascript"></script>
-<script src="resources/hotspotResizer.js"></script>
-
-<script type="text/javascript">
-
-    var currentPageNumber = 1;
-    onHashChange();
-    window.addEventListener("hashchange", onHashChange, false);
-    window.addEventListener('focus',  resizeCurrentPage, false);
-    window.addEventListener('resize', resizeCurrentPage,  false);
-    document.addEventListener('fullscreenchange', resizeCurrentPage,  false);
-
-    function onHashChange() {
-        gotoPage(getPageNameFromUrl());
-    }
-
-    function getPageNameFromUrl() {
-        return window.location.hash.replace('#', '') || currentPageNumber;
-    }
-
-    function gotoPage(newPage) {
-        if(!newPage) {
-            return;
-        }
-        if(newPage !== currentPageNumber) {
-            setPageDisplayProperty(currentPageNumber, "none");
-        }
-        setPageDisplayProperty(newPage, "block");
-        currentPageNumber = newPage;
-        resizeCurrentPage();
-    }
-
-    function resizeCurrentPage() {
-        HotspotResizer.resizeHotspots(getPage(currentPageNumber));
-    }
-
-    function setPageDisplayProperty(pageNumber, displayPropertyValue){
-        var page = getPage(pageNumber);
-        if(!page){
-            return;
-        }
-        page.style.display = displayPropertyValue;
-    }
-
-    function getPage(pageNumber) {
-        return document.getElementById("page" + pageNumber);
-    }
-
-</script>
 
 </body>
 </html>

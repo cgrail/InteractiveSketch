@@ -1,0 +1,23 @@
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+img {
+    /** Set image interpolation for Internet Explorer */
+    -ms-interpolation-mode: bicubic;
+}
+.sketches > div {
+    margin: 0 auto;
+    display: none;
+    animation: fadeIn 1s;
+}
+.sketches div img {
+    width: 100%;
+    display: block;
+}
+.hotspot {
+    display: block;
+    background-color: yellow;
+    position: relative;
+    opacity: 0.5;
+}

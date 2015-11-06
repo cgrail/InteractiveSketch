@@ -34,7 +34,7 @@ var HotspotResizer = function () {
             if(!rootElement){
                 return;
             }
-            var image = rootElement.getElementsByClassName("hotspotImage")[0];
+            var image = rootElement.getElementsByTagName("img")[0];
             if(!image){
                 return;
             }
