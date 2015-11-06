@@ -13,10 +13,7 @@
         /** Set image interpolation for Internet Explorer */
         -ms-interpolation-mode: bicubic;
     }
-    .sketches {
-        margin: 0 auto;
-    }
-    .sketches div {
+    .sketches > div {
         margin: 0 auto;
         display: none;
         animation: fadeIn 1s;
@@ -25,17 +22,19 @@
         width: 100%;
         display: block;
     }
+    .hotspot {
+        display: block;
+        background-color: yellow;
+        position: relative;
+        opacity: 0.5;
+    }
 </style>
 
+<div class="sketches">
+    <div id="page1" style="max-width: 1200px">
+        <a href="#2" onclick="gotoPage(2)" class="hotspot" style="width: 1115px;height: 57px;top: 200px;left: 35px;"></a>
 
-
-<div class="sketches" style="max-width: 1200px">
-    <div id="page1"  style="display:visible">
-        <a href="#2" onclick="gotoPage(2)">
-            <img src="1-product-catalog_arent.gif"/>
-        </a>
-        <div style="width: 300px; height: 200px; background-color:blue;">
-        </div>
+        <img src="1-product-catalog_arent.gif" class="hotspotImage"/>
 
     </div>
 
@@ -46,21 +45,40 @@
     </div>
 </div>
 
+<script type="text/javascript"></script>
+<script src="resources/hotspotResizer.js"></script>
+
 <script type="text/javascript">
 
-    var currentPageNumber = getPageNameFromUrl() || 1;
-    gotoPage(currentPageNumber);
+    var currentPageNumber = 1;
+    onHashChange();
+    window.addEventListener("hashchange", onHashChange, false);
+    window.addEventListener('focus',  resizeCurrentPage, false);
+    window.addEventListener('resize', resizeCurrentPage,  false);
+    document.addEventListener('fullscreenchange', resizeCurrentPage,  false);
+
+    function onHashChange() {
+        gotoPage(getPageNameFromUrl());
+    }
 
     function getPageNameFromUrl() {
-        return window.location.hash.replace('#', '');
+        return window.location.hash.replace('#', '') || currentPageNumber;
     }
 
     function gotoPage(newPage) {
+        if(!newPage) {
+            return;
+        }
         if(newPage !== currentPageNumber) {
             setPageDisplayProperty(currentPageNumber, "none");
         }
         setPageDisplayProperty(newPage, "block");
         currentPageNumber = newPage;
+        resizeCurrentPage();
+    }
+
+    function resizeCurrentPage() {
+        HotspotResizer.resizeHotspots(getPage(currentPageNumber));
     }
 
     function setPageDisplayProperty(pageNumber, displayPropertyValue){
