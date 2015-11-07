@@ -110,4 +110,11 @@ var HotspotNavigation = function () {
 
 }();
 
+function toggleHotspots() {
+    var hotspots = document.getElementsByClassName("hotspot");
+    for (var i=0; i<hotspots.length; i++) {
+        hotspots[i].classList.toggle("visibleHotspot");
+    }
+}
+
 window.addEventListener("load", HotspotNavigation.init,false);

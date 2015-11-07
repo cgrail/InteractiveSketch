@@ -6,18 +6,31 @@ img {
     /** Set image interpolation for Internet Explorer */
     -ms-interpolation-mode: bicubic;
 }
-.sketches > div {
+.hotspotVisibilityToggle{
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    -webkit-user-select: none;
+}
+.pages > .page {
     margin: 0 auto;
     display: none;
     animation: fadeIn 1s;
+    position: relative;
 }
-.sketches div img {
+.page img {
     width: 100%;
     display: block;
 }
-.hotspot {
+.page .hotspot {
     display: block;
+    position: absolute;
+}
+
+.page .visibleHotspot {
     background-color: yellow;
-    position: relative;
     opacity: 0.5;
 }
