@@ -1,3 +1,10 @@
+var toggleHotspots = function () {
+    var hotspots = document.getElementsByClassName("hotspot");
+    for (var i=0; i<hotspots.length; i++) {
+        hotspots[i].classList.toggle("visibleHotspot");
+    }
+}
+
 var HotspotResizer = function () {
 
     var supportedStyles = ["width", "height", "top", "left"];
@@ -101,6 +108,8 @@ var HotspotNavigation = function () {
     return {
         init : function(){
             onHashChange();
+            // Make hotspots visible by default
+            toggleHotspots();
             window.addEventListener("hashchange", onHashChange, false);
             window.addEventListener('focus',  resizeCurrentPage, false);
             window.addEventListener('resize', resizeCurrentPage,  false);
@@ -109,12 +118,5 @@ var HotspotNavigation = function () {
     }
 
 }();
-
-function toggleHotspots() {
-    var hotspots = document.getElementsByClassName("hotspot");
-    for (var i=0; i<hotspots.length; i++) {
-        hotspots[i].classList.toggle("visibleHotspot");
-    }
-}
 
 window.addEventListener("load", HotspotNavigation.init,false);
